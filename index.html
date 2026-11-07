@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#153f39">
+  <title>Petit labo · Le pendule</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./"><span class="brand-icon" aria-hidden="true">◒</span> Petit labo <span class="brand-sub">Maths & physique</span></a>
+    <label class="experiment-menu">Expérience
+      <select id="experiment"><option value="pendulum">01 · Le pendule simple</option><option disabled>Autres expériences · à venir</option></select>
+    </label>
+  </header>
+  <main>
+    <div class="intro"><p class="eyebrow">OBSERVER · MESURER · COMPRENDRE</p><h1>Le pendule simple<span>.</span></h1><p>Un fil, une masse, et des questions à explorer.</p></div>
+    <div class="workspace">
+      <section class="simulation card" aria-labelledby="simulation-title">
+        <div class="section-head"><h2 id="simulation-title">L’expérience</h2><span id="status" class="badge">Prêt</span></div>
+        <div class="scene">
+          <svg id="pendulum" viewBox="0 0 600 440" role="img" aria-label="Pendule simple à l’arrêt">
+            <defs><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r="1" fill="#cdd8d2"/></pattern><radialGradient id="bob-shade" cx="32%" cy="25%"><stop offset="0" stop-color="#f3b775"/><stop offset="1" stop-color="#cd7239"/></radialGradient></defs>
+            <rect width="600" height="440" fill="url(#grid)"/>
+            <path id="sweep" fill="none" stroke="#d9a275" stroke-width="1.5" stroke-dasharray="4 6"/>
+            <line x1="300" y1="64" x2="300" y2="400" stroke="#b4c7bc" stroke-dasharray="5 7"/>
+            <line x1="260" y1="54" x2="340" y2="54" stroke="#254d45" stroke-width="7" stroke-linecap="round"/>
+            <line id="string" x1="300" y1="64" x2="300" y2="330" stroke="#254d45" stroke-width="2.5"/>
+            <circle id="bob" cx="300" cy="330" r="22" fill="url(#bob-shade)" stroke="#b86835" stroke-width="1.5"/>
+            <circle cx="300" cy="64" r="5" fill="#254d45"/>
+            <text x="313" y="410" fill="#74877b" font-size="12">position d’équilibre</text>
+          </svg>
+          <div class="scene-note"><span class="live-dot"></span> Terre · g = 9,81 m/s² · sans frottement</div>
+        </div>
+        <div class="motion-controls"><button id="start" class="primary">▶ Démarrer</button><button id="stop" disabled>Ⅱ Pause</button><button id="reset" class="quiet">↺ Réinitialiser</button></div>
+        <p class="hint">Une oscillation complète : un aller-retour jusqu’au même point.</p>
+      </section>
+      <aside class="side-panel">
+        <section class="card settings" aria-labelledby="settings-title">
+          <div class="section-head"><h2 id="settings-title">Les paramètres</h2><span class="step">01</span></div>
+          <div class="parameter"><label for="mass">Masse <small>(poids du pendule)</small></label><output id="mass-value" for="mass"></output><input id="mass" type="range" min="50" max="1000" step="10" value="200"><div class="range-labels"><span>50 g</span><span>1 000 g</span></div></div>
+          <div class="parameter"><label for="length">Longueur du fil</label><output id="length-value" for="length"></output><input id="length" type="range" min="0.2" max="2" step="0.05" value="1"><div class="range-labels"><span>0,20 m</span><span>2,00 m</span></div></div>
+          <div class="parameter"><label for="angle">Angle initial</label><output id="angle-value" for="angle"></output><input id="angle" type="range" min="5" max="70" step="1" value="25"><div class="range-labels"><span>5°</span><span>70°</span></div></div>
+          <p class="hint">Changer un paramètre remet le pendule et le chronomètre au départ.</p>
+        </section>
+        <section class="card stopwatch" aria-labelledby="stopwatch-title">
+          <div class="section-head"><h2 id="stopwatch-title">Le chronomètre</h2><span class="step">02</span></div>
+          <div id="timer" class="timer" role="timer" aria-label="Temps chronométré">00:00,00</div>
+          <div class="timer-controls"><button id="timer-toggle" class="primary">Démarrer le chrono</button><button id="timer-reset" aria-label="Remettre le chronomètre à zéro">↺</button></div>
+          <div class="measure"><label for="cycles">Oscillations comptées</label><input id="cycles" type="number" min="1" max="100" step="1" value="10"></div>
+          <div class="result"><span>Période mesurée <small>temps ÷ oscillations</small></span><strong id="period">—</strong></div>
+          <p class="hint">Lance le chrono à un point de repère. Arrête-le après le nombre d’oscillations choisi.</p>
+        </section>
+      </aside>
+    </div>
+    <section class="explore" aria-labelledby="explore-title"><span class="explore-icon" aria-hidden="true">?</span><div><p class="eyebrow">À TOI DE JOUER</p><h2 id="explore-title">Qu’est-ce qui change la durée d’une oscillation ?</h2><p>Chronomètre 10 oscillations, puis change un seul paramètre. Essaie avec une masse plus lourde, un fil plus long ou un angle différent.</p><details><summary>Comprendre le modèle</summary><p>La masse se mesure en grammes ou en kilogrammes ; le poids est une force qui se mesure en newtons. Ici, la masse est suspendue à un fil idéal, sans frottement. Sa masse n’influence pas la durée des oscillations. Un fil plus long ralentit le mouvement. À grand angle, la période augmente aussi.</p><p>Pour de petits angles, la période est approximativement T = 2π√(L/g). La simulation calcule le mouvement avec l’équation θ″ = −(g/L) sin(θ), y compris pour de grands angles.</p><p>Le dessin adapte la longueur du fil à l’écran. Pour comparer les expériences, utilise les valeurs des curseurs.</p></details></div></section>
+    <footer>Petit labo <span>Expérience 01 / Le pendule simple</span></footer>
+  </main>
+</body>
+</html>
