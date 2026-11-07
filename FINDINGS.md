@@ -28,6 +28,18 @@
 
 ## Vérification et suite
 
+### Étape 5 : QR-code dynamique près de Petit labo
+
+- Demande précisée : générer le code à partir de la page ouverte, sans coder le nom du site en dur.
+- `share-qr.js` utilise l’URL HTTP(S) courante, sans paramètres ni fragment. Aucun domaine ni chemin de l’application n’est fixé dans le code de partage.
+- QR-code SVG noir sur blanc près de « Petit labo », lien cliquable accessible au clavier, disposition adaptée au mobile.
+- Génération dans le navigateur avec qrcode-generator 1.4.4, chargé depuis jsDelivr uniquement pour le QR-code. L’adresse du site n’est pas transmise au CDN pour encodage. La simulation reste indépendante du chargement.
+- Repli en lien si le générateur échoue ; indication « QR-code disponible en ligne » pour une ouverture directe en `file:`.
+- La tentative antérieure de génération d’un fichier fixe n’a produit aucun fichier dans le projet ; installation temporaire annulée. Cette approche est remplacée par la génération dynamique.
+- Vérification de l’adresse GitHub Pages non concluante avec l’outil web ; sans incidence sur la solution dynamique.
+- Syntaxe et contrôle des espaces du diff validés. Contrôles avec générateur et DOM simulés réussis : domaines et sous-dossiers variables, retrait des paramètres/fragment, HTTP/HTTPS, ouverture fichier, repli sur erreurs de chargement ou d’encodage, et marge de quatre modules.
+- Générateur réel, scan et rendu visuel à tester manuellement ; aucun navigateur ni lecture d’image lancé.
+
 ### Commit de l’étape 4
 
 - Commit demandé par l’utilisateur : choix des onze astres, gravités, palettes et dessins SVG, adaptation du temps pour l’étoile à neutrons et documentation.

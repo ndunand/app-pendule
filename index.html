@@ -8,10 +8,15 @@
   <link rel="stylesheet" href="style.css">
   <script src="bodies.js" defer></script>
   <script src="app.js" defer></script>
+  <script src="share-qr.js" defer></script>
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="./"><span class="brand-icon" aria-hidden="true">◒</span> Petit labo <span class="brand-sub">Maths & physique</span></a>
+    <div class="brand-sharing">
+      <a class="brand" href="./"><span class="brand-icon" aria-hidden="true">◒</span> Petit labo <span class="brand-sub">Maths & physique</span></a>
+      <a id="site-qr" class="site-qr" hidden aria-label="Ouvrir cette page sur un téléphone"><span id="qr-code" aria-hidden="true"></span><span id="qr-caption">Ouvrir sur mobile</span></a>
+      <span id="qr-message" class="qr-message" role="status">QR-code disponible en ligne.</span>
+    </div>
     <label class="experiment-menu">Expérience
       <select id="experiment"><option value="pendulum">01 · Le pendule simple</option><option disabled>Autres expériences · à venir</option></select>
     </label>

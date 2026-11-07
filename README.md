@@ -1,6 +1,6 @@
 # Petit labo · Le pendule simple
 
-Application statique en français, adaptée aux smartphones, sans dépendance et sans compilation.
+Application statique en français, adaptée aux smartphones, sans compilation. La simulation fonctionne hors ligne ; seul le générateur du QR-code est chargé à la demande depuis un CDN.
 
 ## Tester
 
@@ -8,11 +8,17 @@ Ouvrir `index.html` dans un navigateur. Tous les fichiers sont locaux ; aucune c
 
 ## Publier sur GitHub Pages
 
-1. Créer un dépôt GitHub et y ajouter `index.html`, `style.css`, `bodies.js`, `app.js` et `astres.svg` à la racine.
+1. Créer un dépôt GitHub et y ajouter `index.html`, `style.css`, `bodies.js`, `app.js`, `share-qr.js` et `astres.svg` à la racine.
 2. Dans **Settings → Pages**, choisir **Deploy from a branch**, puis la branche contenant ces fichiers et le dossier **/ (root)**.
 3. Le site sera accessible à l’adresse GitHub Pages indiquée par GitHub, généralement `https://UTILISATEUR.github.io/DEPOT/`.
 
 Les chemins relatifs permettent l’utilisation dans un sous-dossier GitHub Pages. Aucun serveur applicatif ni clé API n’est nécessaire.
+
+## QR-code de partage
+
+Près de « Petit labo », le QR-code est généré dans le navigateur à partir de l’adresse HTTP(S) de la page ouverte, sans nom de domaine ni chemin de site codés en dur. Les paramètres et le fragment sont retirés pour partager la page. Le code est aussi un lien cliquable.
+
+La bibliothèque [qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator/tree/master/js), version 1.4.4, est chargée depuis jsDelivr. L’adresse à encoder n’est pas envoyée à un service de génération de QR-code. Si le CDN est inaccessible, un simple lien reste disponible et la simulation continue de fonctionner. En ouvrant directement le fichier HTML (`file:`), aucun QR-code n’est proposé ; il faut héberger la page. Un téléphone doit pouvoir accéder à l’adresse encodée : une adresse `localhost` reste locale à chaque appareil.
 
 ## Expérience
 
