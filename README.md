@@ -8,7 +8,7 @@ Ouvrir `index.html` dans un navigateur. Tous les fichiers sont locaux ; aucune c
 
 ## Publier sur GitHub Pages
 
-1. Créer un dépôt GitHub et y ajouter `index.html`, `style.css` et `app.js` à la racine.
+1. Créer un dépôt GitHub et y ajouter `index.html`, `style.css`, `bodies.js`, `app.js` et `astres.svg` à la racine.
 2. Dans **Settings → Pages**, choisir **Deploy from a branch**, puis la branche contenant ces fichiers et le dossier **/ (root)**.
 3. Le site sera accessible à l’adresse GitHub Pages indiquée par GitHub, généralement `https://UTILISATEUR.github.io/DEPOT/`.
 
@@ -16,6 +16,7 @@ Les chemins relatifs permettent l’utilisation dans un sous-dossier GitHub Page
 
 ## Expérience
 
+- Choisir l’astre : Terre, Lune, Mercure, Vénus, Mars, Jupiter, Saturne, Uranus, Neptune, Soleil ou étoile à neutrons. La gravité, la palette et le dessin près du titre s’adaptent. Le changement remet l’expérience au départ en conservant les paramètres et les options.
 - Choisir la masse, la longueur et l’angle initial, puis démarrer le pendule.
 - Utiliser le chronomètre indépendant pour mesurer plusieurs oscillations.
 - Renseigner le nombre d’oscillations comptées : la période est le temps mesuré divisé par ce nombre.
@@ -29,6 +30,17 @@ Les chemins relatifs permettent l’utilisation dans un sous-dossier GitHub Page
 
 ## Modèle
 
-Pendule idéal, fil sans masse, masse ponctuelle, gravité terrestre constante (9,81 m/s²), aucun frottement. Équation : θ″ = −(g/L) sin(θ), intégrée avec Runge–Kutta d’ordre 4 à pas fixe de 1/240 s. La masse ne change pas la période. La longueur du fil est représentée avec une échelle adaptée à l’écran.
+Pendule idéal, fil sans masse, masse ponctuelle, gravité constante pour l’astre choisi, aucun frottement. Équation : θ″ = −(g/L) sin(θ), intégrée avec Runge–Kutta d’ordre 4. Le pas, fixé au début de chaque expérience, est le minimum entre 1/240 s et 0,02/√(g/L) pour conserver la précision aux fortes gravités. La masse ne change pas la période. La longueur du fil est représentée avec une échelle adaptée à l’écran.
+
+L’étoile à neutrons utilise une gravité illustrative de 10¹² m/s². Son animation est ralentie d’un facteur 1 000 000 : une seconde réelle correspond à une microseconde simulée. Le chrono et la période affichent des microsecondes de l’expérience ; le comptage automatique utilise la même échelle. Les autres astres sont simulés en temps réel.
+
+Les cas des géantes gazeuses, du Soleil et de l’étoile à neutrons servent de comparaisons imaginaires : le modèle ne représente pas une installation réalisable et ne tient pas compte des effets relativistes. Les dessins SVG sont schématiques et sans échelle commune.
+
+### Sources
+
+- [NASA/JPL : paramètres physiques des planètes](https://ssd.jpl.nasa.gov/planets/phys_par.html) ; valeur terrestre usuelle conservée à 9,81 m/s².
+- [NASA : Lune](https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html).
+- [NASA : Soleil](https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html).
+- [NASA : introduction aux étoiles à neutrons](https://asd.gsfc.nasa.gov/Tod.Strohmayer/ns_intro.html), pour l’ordre de grandeur de la gravité.
 
 Le menu contient la première expérience et un emplacement désactivé pour les expériences futures.

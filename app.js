@@ -2,8 +2,9 @@
 
 const $ = id => document.getElementById(id);
 const controls = ['mass', 'length', 'angle'];
-const g = 9.81;
-const step = 1 / 240;
+let g = 9.81;
+let timeScale = 1;
+let step = 1 / 240;
 let theta = 0;
 let velocity = 0;
 let running = false;
@@ -41,7 +42,7 @@ function draw() {
 }
 
 function elapsed(now) {
-    return timerElapsed + (timerRunning ? now - timerStarted : 0);
+    return timerElapsed + (timerRunning ? (now - timerStarted) * timeScale : 0);
 }
 
 function updateTimer(now = performance.now()) {
@@ -50,10 +51,12 @@ function updateTimer(now = performance.now()) {
     const minutes = String(Math.floor(hundredths / 6000)).padStart(2, '0');
     const seconds = String(Math.floor(hundredths / 100) % 60).padStart(2, '0');
     $('timer').textContent = `${minutes}:${seconds},${String(hundredths % 100).padStart(2, '0')}`;
+    if (timeScale !== 1) $('timer').textContent = `${number(milliseconds * 1000, 2)} µs`;
     const cycles = Number($('cycles').value);
     $('period').textContent = milliseconds > 0 && (!$('auto-measure').checked || measurementComplete)
         && Number.isInteger(cycles) && cycles >= 1 && cycles <= 100
-        ? `${number(milliseconds / 1000 / cycles, 2)} s` : '—';
+        ? (timeScale !== 1 ? `${number(milliseconds * 1000 / cycles, 2)} µs`
+            : `${number(milliseconds / 1000 / cycles, 2)} s`) : '—';
 }
 
 function resetTimer() {
@@ -86,6 +89,8 @@ function canStartTimer() {
 function reset() {
     running = false;
     accumulator = 0;
+    // Conserver un pas très court devant la période, même en gravité extrême.
+    step = Math.min(1 / 240, 0.02 / Math.sqrt(g / Number($('length').value)));
     theta = Number($('angle').value) * Math.PI / 180;
     velocity = 0;
     for (const id of controls) {
@@ -114,7 +119,7 @@ function integrate(dt) {
 // même si le chrono est lancé au milieu d’une oscillation.
 function advance(now) {
     if (!running || previousFrame === null) return;
-    accumulator += (now - previousFrame) / 1000;
+    accumulator += (now - previousFrame) / 1000 * timeScale;
     while (running && accumulator >= step) {
         const beforeTheta = theta, beforeVelocity = velocity;
         const omega = Math.sqrt(g / Number($('length').value));
@@ -127,7 +132,7 @@ function advance(now) {
             const target = Number($('cycles').value) * 2 * Math.PI;
             if (measuredPhase + delta >= target) {
                 const fraction = (target - measuredPhase) / delta;
-                const finishedAt = now - (accumulator + step * (1 - fraction)) * 1000;
+                const finishedAt = now - (accumulator + step * (1 - fraction)) / timeScale * 1000;
                 measuredPhase = target;
                 measurementComplete = true;
                 setTimer(false, finishedAt);
@@ -215,6 +220,7 @@ $('sync-timer').addEventListener('change', () => {
     }
 });
 $('auto-measure').addEventListener('change', reset);
+$('celestial-body').addEventListener('change', selectBody);
 $('cycles').addEventListener('input', () => {
     if ($('auto-measure').checked) reset();
     else updateTimer();
@@ -226,5 +232,27 @@ document.addEventListener('visibilitychange', () => {
     if (timerRunning) $('timer-toggle').click();
     previousFrame = null;
 });
-reset();
+function selectBody() {
+    const id = $('celestial-body').value;
+    const body = celestialBodies[id];
+    g = body.gravity;
+    timeScale = body.timeScale || 1;
+    const root = document.documentElement;
+    root.style.setProperty('--green', body.color);
+    root.style.setProperty('--body-light', body.light);
+    root.style.setProperty('--body-background', body.background);
+    root.style.setProperty('--body-accent', body.accent);
+    $('body-image').setAttribute('src', `astres.svg#${id}`);
+    $('body-image').setAttribute('alt', `Dessin : ${body.name}`);
+    $('body-name').textContent = body.name;
+    $('body-description').textContent = body.note;
+    const gravity = id === 'neutron' ? '10¹²' : number(g, 2);
+    $('gravity-value').textContent = `g = ${gravity} m/s²`;
+    $('environment-note').textContent = `${body.name} · g = ${gravity} m/s² · sans frottement`;
+    $('time-scale-note').hidden = timeScale === 1;
+    $('timer').setAttribute('aria-label', timeScale === 1 ? 'Temps chronométré' : 'Temps de l’expérience en microsecondes');
+    reset();
+}
+
+selectBody();
 requestAnimationFrame(frame);

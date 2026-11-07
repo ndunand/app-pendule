@@ -6,6 +6,7 @@
   <meta name="theme-color" content="#153f39">
   <title>Petit labo · Le pendule</title>
   <link rel="stylesheet" href="style.css">
+  <script src="bodies.js" defer></script>
   <script src="app.js" defer></script>
 </head>
 <body>
@@ -16,7 +17,11 @@
     </label>
   </header>
   <main>
-    <div class="intro"><p class="eyebrow">OBSERVER · MESURER · COMPRENDRE</p><h1>Le pendule simple<span>.</span></h1><p>Un fil, une masse, et des questions à explorer.</p></div>
+    <div class="intro"><div><p class="eyebrow">OBSERVER · MESURER · COMPRENDRE</p><h1>Le pendule simple<span>.</span></h1><p>Un fil, une masse, et des questions à explorer.</p></div><figure class="body-portrait"><img id="body-image" src="astres.svg#earth" width="120" height="120" alt="Dessin de la Terre"><figcaption id="body-name">Terre</figcaption></figure></div>
+    <section class="body-selector card" aria-label="Lieu de l’expérience">
+      <div class="body-choice"><label for="celestial-body">Où se déroule l’expérience ?</label><select id="celestial-body" aria-describedby="body-description"><option value="earth">Terre</option><option value="moon">Lune</option><option value="mercury">Mercure</option><option value="venus">Vénus</option><option value="mars">Mars</option><option value="jupiter">Jupiter</option><option value="saturn">Saturne</option><option value="uranus">Uranus</option><option value="neptune">Neptune</option><option value="sun">Soleil</option><option value="neutron">Étoile à neutrons</option></select></div>
+      <div class="body-info"><strong id="gravity-value">g = 9,81 m/s²</strong><p id="body-description">Notre point de comparaison : la gravité terrestre.</p><p class="hint">Changer d’astre remet l’expérience au départ.</p></div>
+    </section>
     <div class="workspace">
       <section class="simulation card" aria-labelledby="simulation-title">
         <div class="section-head"><h2 id="simulation-title">L’expérience</h2><span id="status" class="badge">Prêt</span></div>
@@ -32,7 +37,8 @@
             <circle cx="300" cy="64" r="5" fill="#254d45"/>
             <text x="313" y="410" fill="#74877b" font-size="12">position d’équilibre</text>
           </svg>
-          <div class="scene-note"><span class="live-dot"></span> Terre · g = 9,81 m/s² · sans frottement</div>
+          <div class="scene-note"><span class="live-dot"></span><span id="environment-note">Terre · g = 9,81 m/s² · sans frottement</span></div>
+          <p id="time-scale-note" class="time-scale-note" hidden>Ralenti × 1 000 000 · le chrono indique le temps de l’expérience en µs.</p>
         </div>
         <div class="motion-controls"><button id="start" class="primary">▶ Démarrer</button><button id="stop" disabled>Ⅱ Pause</button><button id="reset" class="quiet">↺ Réinitialiser</button></div>
         <p class="hint">Une oscillation complète : un aller-retour jusqu’au même point.</p>
@@ -61,6 +67,7 @@
       </aside>
     </div>
     <section class="explore" aria-labelledby="explore-title"><span class="explore-icon" aria-hidden="true">?</span><div><p class="eyebrow">À TOI DE JOUER</p><h2 id="explore-title">Qu’est-ce qui change la durée d’une oscillation ?</h2><p>Chronomètre 10 oscillations, puis change un seul paramètre. Essaie avec une masse plus lourde, un fil plus long ou un angle différent.</p><details><summary>Comprendre le modèle</summary><p>La masse se mesure en grammes ou en kilogrammes ; le poids est une force qui se mesure en newtons. Ici, la masse est suspendue à un fil idéal, sans frottement. Sa masse n’influence pas la durée des oscillations. Un fil plus long ralentit le mouvement. À grand angle, la période augmente aussi.</p><p>Pour de petits angles, la période est approximativement T = 2π√(L/g). La simulation calcule le mouvement avec l’équation θ″ = −(g/L) sin(θ), y compris pour de grands angles.</p><p>Le dessin adapte la longueur du fil à l’écran. Pour comparer les expériences, utilise les valeurs des curseurs.</p></details></div></section>
+    <details class="sources"><summary>Sources des gravités</summary><p>Valeurs arrondies des <a href="https://ssd.jpl.nasa.gov/planets/phys_par.html">paramètres planétaires NASA/JPL</a> (Terre : valeur usuelle de 9,81 m/s²), fiches NASA de la <a href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html">Lune</a> et du <a href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html">Soleil</a>. Pour l’<a href="https://asd.gsfc.nasa.gov/Tod.Strohmayer/ns_intro.html">étoile à neutrons</a>, l’ordre de grandeur choisi est 10¹² m/s². Ces valeurs servent à comparer des pendules idéaux ; dessins sans échelle commune.</p></details>
     <footer>Petit labo <span>Expérience 01 / Le pendule simple</span></footer>
   </main>
 </body>

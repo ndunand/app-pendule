@@ -12,7 +12,7 @@
 
 - Dossier initial vide, aucun dépôt Git existant.
 - Choix : HTML/CSS/JavaScript statiques sans dépendances ni compilation, chemins relatifs pour GitHub Pages.
-- Aucun service d’hébergement créé ; aucun déploiement ni commit effectué.
+- Aucun service d’hébergement créé ni déploiement effectué. Le dossier initialement vide dispose désormais d’un dépôt Git ; les étapes précédentes figurent dans son historique.
 
 ## Étape 1 : implémentation
 
@@ -27,6 +27,27 @@
 - README avec procédure de publication sur GitHub Pages.
 
 ## Vérification et suite
+
+### Commit de l’étape 4
+
+- Commit demandé par l’utilisateur : choix des onze astres, gravités, palettes et dessins SVG, adaptation du temps pour l’étoile à neutrons et documentation.
+- Historique constaté avant commit : `c08c3ad` (mesure automatique et synchronisation), après `01ea6a0` (version initiale).
+- Contrôle des espaces du diff réussi ; vérifications numériques de l’étape 4 déjà réussies. Aucun déploiement ni push demandé.
+
+### Étape 4 : choix de l’astre
+
+- Sélecteur de lieu : les huit planètes, la Lune, le Soleil et une étoile à neutrons (11 choix). Terre par défaut.
+- `bodies.js` centralise noms, gravités, couleurs et textes pédagogiques. Gravités arrondies NASA/JPL, Lune et Soleil des fiches NASA ; Terre conservée à 9,81 m/s². Sources consultées en ligne et liées dans l’app et le README.
+- Gravité illustrative de l’étoile à neutrons : 10¹² m/s², cohérente avec l’ordre de grandeur présenté par la NASA. Pas d’étoile précise ni de correction relativiste.
+- Palette adaptée (fond, scène, boutons, éléments du pendule, accents) ; dessin SVG en regard du titre, avec nom et texte alternatif. Onze dessins vectoriels locaux dans `astres.svg`, sélectionnés par fragment ; aucune image générée, téléchargée ou lue.
+- Changer d’astre remet mouvement, chrono et comptage à zéro, en conservant les paramètres et les cases à cocher.
+- Intégration : pas choisi à chaque remise à zéro, min(1/240 s, 0,02/√(g/L)), pour maintenir la stabilité aux fortes gravités.
+- Étoile à neutrons au ralenti × 1 000 000, annoncé explicitement ; chrono et période en microsecondes physiques. Même échelle de temps pour le mouvement, le chrono, les pauses et l’arrêt automatique. Autres astres en temps réel.
+- Aide contextuelle sur les expériences imaginaires pour les géantes et étoiles, et sur les limites du modèle classique.
+- Publication GitHub Pages : inclure aussi `bodies.js` et `astres.svg` ; README mis à jour.
+- Syntaxe des deux fichiers JavaScript validée. XML du SVG valide, 11 fragments présents.
+- 33 mesures automatiques du code réel avec DOM simulé (11 astres × 3 couples angle/longueur) comparées à une période non linéaire de référence calculée indépendamment par quadrature : erreur relative inférieure à 0,1 %. Changement d’astre, palette/source du dessin, microsecondes, pause/reprise et arrêt avec/sans synchronisation vérifiés.
+- Aucun navigateur, conteneur ni lecture d’image utilisé. Affichage réel des SVG, palettes et mise en page mobile à tester par l’utilisateur.
 
 ### Étape 3 : mesure automatique optionnelle
 
