@@ -19,7 +19,12 @@ Les chemins relatifs permettent l’utilisation dans un sous-dossier GitHub Page
 - Choisir la masse, la longueur et l’angle initial, puis démarrer le pendule.
 - Utiliser le chronomètre indépendant pour mesurer plusieurs oscillations.
 - Renseigner le nombre d’oscillations comptées : la période est le temps mesuré divisé par ce nombre.
-- La pause du pendule laisse le chronomètre indépendant continuer. Réinitialiser le pendule ou modifier un paramètre remet aussi le chronomètre à zéro.
+- Pour une mesure automatique, cocher **Mesurer automatiquement les oscillations**, puis choisir un nombre entier de 1 à 100. L’option est désactivée par défaut : on peut laisser tourner le pendule sans lancer de mesure.
+- Le comptage automatique commence au démarrage du chrono et mesure des allers-retours complets, même si le pendule est déjà en mouvement. Le chrono s’arrête au nombre choisi ; la période s’affiche alors. Avec la synchronisation activée, le pendule s’arrête aussi. Sans synchronisation, il continue à osciller.
+- Modifier le mode de mesure ou le nombre en mode automatique remet l’expérience au départ. Après une mesure terminée, **Nouvelle mesure** lance un nouveau comptage avec un chrono à zéro.
+- L’option **Synchroniser le pendule et le chronomètre** est désactivée par défaut. Lorsqu’elle est cochée, les commandes de démarrage et de pause de chaque appareil pilotent les deux ; la remise à zéro du chrono remet aussi le pendule au départ.
+- Cocher cette option aligne immédiatement le chrono sur l’état du pendule, en conservant le temps déjà mesuré. La décocher permet de reprendre les commandes indépendantes.
+- Sans synchronisation, la pause du pendule laisse le chronomètre indépendant continuer. Réinitialiser le pendule ou modifier un paramètre remet aussi le chronomètre à zéro.
 - Passer à un autre onglet ou masquer la page suspend le pendule et le chronomètre. Les reprendre avec leurs boutons.
 
 ## Modèle

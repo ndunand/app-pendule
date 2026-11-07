@@ -28,6 +28,25 @@
 
 ## Vérification et suite
 
+### Étape 3 : mesure automatique optionnelle
+
+- Demande confirmée : choisir un nombre d’oscillations et arrêter automatiquement le chrono, avec possibilité de laisser tourner le pendule sans mesure automatique.
+- Case « Mesurer automatiquement les oscillations », désactivée par défaut. Cible entière de 1 à 100 (10 par défaut), progression visible et indication de fin.
+- Comptage par tours de phase de la simulation, indépendant du point de départ : un aller-retour complet vaut une oscillation. Interpolation dans le dernier pas pour arrêter le chrono à l’instant de fin.
+- L’arrêt automatique suspend aussi le pendule si la synchronisation est cochée ; sinon le pendule continue.
+- Période affichée à la fin de la mesure automatique. Le mode manuel conserve le calcul existant ; sans démarrer le chrono, le pendule peut tourner sans mesure.
+- Changer le mode ou la cible automatique réinitialise l’expérience. Une mesure terminée peut être suivie d’une nouvelle mesure, avec chrono et comptage remis à zéro.
+- Contrôles avec DOM simulé réussis : mouvement libre, arrêt à la cible, synchronisation activée/désactivée, démarrage au milieu d’une oscillation, pause/reprise, nouvelle mesure, désactivation du mode et cible invalide. Syntaxe JavaScript validée ; aucun test de navigateur effectué.
+
+### Étape 2 : synchronisation optionnelle
+
+- Ajout d’une case à cocher dans le panneau du chronomètre, désactivée par défaut.
+- Si elle est cochée, démarrage, pause et reprise depuis l’un ou l’autre panneau pilotent le pendule et le chrono avec le même instant de référence.
+- L’activation aligne immédiatement le chrono sur l’état du pendule sans effacer le temps mesuré ; la désactivation conserve les états courants et rend les commandes indépendantes.
+- En mode synchronisé, la remise à zéro du chrono réinitialise également le pendule.
+- La pause intègre aussi le temps écoulé depuis la dernière image pour aligner mouvement et chrono.
+- Syntaxe JavaScript validée. Contrôles avec DOM simulé réussis : mode indépendant, activation à l’arrêt et en mouvement, démarrage/pause/reprise depuis les deux panneaux, conservation du temps, remise à zéro commune, onglet masqué et désactivation de l’option. Aucun navigateur lancé.
+
 - Vérification `node --check app.js` réussie.
 - Contrôle du code réel avec DOM simulé : identifiants HTML référencés présents, chronomètre de 20 s / 10 oscillations = 2,00 s, remise à zéro réussie.
 - Modèle vérifié à L = 1 m : période de 2,008 s à 5° (proche de l’approximation de 2,006 s), 2,212 s à 70° ; même période pour 200 g et 1 000 g.

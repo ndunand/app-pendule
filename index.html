@@ -47,11 +47,16 @@
         </section>
         <section class="card stopwatch" aria-labelledby="stopwatch-title">
           <div class="section-head"><h2 id="stopwatch-title">Le chronomètre</h2><span class="step">02</span></div>
+          <label class="sync-option"><input id="sync-timer" type="checkbox" aria-describedby="sync-help"> Synchroniser le pendule et le chronomètre</label>
+          <p id="sync-help" class="hint">Si l’option est activée, ils démarrent et se mettent en pause ensemble.</p>
           <div id="timer" class="timer" role="timer" aria-label="Temps chronométré">00:00,00</div>
           <div class="timer-controls"><button id="timer-toggle" class="primary">Démarrer le chrono</button><button id="timer-reset" aria-label="Remettre le chronomètre à zéro">↺</button></div>
-          <div class="measure"><label for="cycles">Oscillations comptées</label><input id="cycles" type="number" min="1" max="100" step="1" value="10"></div>
+          <label class="sync-option"><input id="auto-measure" type="checkbox" aria-describedby="auto-help"> Mesurer automatiquement les oscillations</label>
+          <p id="auto-help" class="hint">Le chrono s’arrête après le nombre choisi. Sans synchronisation, démarre aussi le chrono pour lancer la mesure.</p>
+          <div class="measure"><label id="cycles-label" for="cycles">Oscillations comptées</label><input id="cycles" type="number" min="1" max="100" step="1" value="10" required></div>
+          <p id="measurement-progress" class="hint" role="status" hidden></p>
           <div class="result"><span>Période mesurée <small>temps ÷ oscillations</small></span><strong id="period">—</strong></div>
-          <p class="hint">Lance le chrono à un point de repère. Arrête-le après le nombre d’oscillations choisi.</p>
+          <p id="measurement-help" class="hint">Lance le chrono à un point de repère. Arrête-le après le nombre d’oscillations choisi.</p>
         </section>
       </aside>
     </div>
